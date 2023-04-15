@@ -19,19 +19,10 @@ export class UserService {
         
         return this.userRepository.save({
             ...createUserDto,
+            typeUser: 1,
             password: passwordHashed,
         })
 
-        // const user: UserEntity = {
-        //     ...createUserDto,
-        //     id: this.users.length + 1,
-        //     password: passwordHashed,
-        // };
-
-        // this.users.push(user);
-        // console.log('passoword: ', passwordHashed);
-
-        // return (user);
     }
 
     async getAllUser(): Promise<UserEntity[]>{
