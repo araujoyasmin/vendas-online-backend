@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { RolesGuard } from './guards/roles.guards';
 import { APP_GUARD } from '@nestjs/core';
 import {JwtModule } from '@nestjs/jwt';
+import { User2Service } from './user2/user2.service';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -32,7 +33,8 @@ import {JwtModule } from '@nestjs/jwt';
     {
       provide: APP_GUARD,
       useClass: RolesGuard,
-    }
+    },
+    User2Service
   ],
 })
 export class AppModule {}
