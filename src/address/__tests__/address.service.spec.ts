@@ -71,6 +71,13 @@ describe('AddressService', () => {
       service.createAddress(createAddressMock, userEntityMock.id)
     ).rejects.toThrowError();
   });
+
+  it('should return error if exception in cityService', async () => {
+    jest.spyOn(cityService,'getCityById').mockRejectedValueOnce(new Error());
+    expect(
+      service.createAddress(createAddressMock, userEntityMock.id)
+    ).rejects.toThrowError();
+  });
  
 
 });

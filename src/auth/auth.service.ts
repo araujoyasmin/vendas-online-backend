@@ -17,7 +17,7 @@ export class AuthService {
     ){}
 
     async login(loginDto: LoginDto): Promise<ReturnLoginDto>{
-        const user: UserEntity | undefined = await  this.userService.getUserByEmail(loginDto.email).catch(() => undefined);
+        const user: UserEntity | undefined = await this.userService.getUserByEmail(loginDto.email).catch(() => undefined);
     
         const isMatch = await compare(loginDto.password, user?.password || '');
 
@@ -26,7 +26,7 @@ export class AuthService {
         }
 
         return {
-            accessToken: this.jwtService.sign({...new LoginPayload(user)}),
+            accessToken: await this.jwtService.sign({...new LoginPayload(user)}),
             user: new ReturnUserDto(user),
         };
     }
