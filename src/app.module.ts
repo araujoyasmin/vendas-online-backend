@@ -10,6 +10,8 @@ import { AuthModule } from './auth/auth.module';
 import { RolesGuard } from './guards/roles.guards';
 import { APP_GUARD } from '@nestjs/core';
 import {JwtModule } from '@nestjs/jwt';
+import { CategoryModule } from './category/category.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -26,7 +28,7 @@ import {JwtModule } from '@nestjs/jwt';
       migrations: [`${__dirname}/migration/{.ts,*.js}`],
       migrationsRun: true
     })
-    ,UserModule, StateModule, CityModule, AddressModule, CacheModule, AuthModule, JwtModule],
+    ,UserModule, StateModule, CityModule, AddressModule, CacheModule, AuthModule, JwtModule, CategoryModule, ProductModule],
   controllers: [],
   providers: [
     {
