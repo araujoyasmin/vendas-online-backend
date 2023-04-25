@@ -5,14 +5,26 @@ import { ProductEntity } from '../entities/product.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { productMock } from '../__mocks__/product.mock';
 import { rejects } from 'assert';
+import { createProductMock } from '../../category/__mocks__/create-product.mock';
+import e from 'express';
+import { CategoryService } from '../../category/category.service';
+import { categoryMock } from '../../category/__mocks__/category.mock';
 
 describe('ProductService', () => {
   let service: ProductService;
   let productRepository: Repository<ProductEntity>;
+  let categoryService: CategoryService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [ProductService, {
+      providers: [ProductService, 
+        {
+          provide: CategoryService,
+          useValue: {
+            getCategoryById: jest.fn().mockResolvedValue(categoryMock),
+          }
+        }
+      , {
         provide: getRepositoryToken(ProductEntity),
         useValue: {
           find:jest.fn().mockResolvedValue([productMock]),
@@ -22,11 +34,13 @@ describe('ProductService', () => {
     }).compile();
 
     service = module.get<ProductService>(ProductService);
+    categoryService = module.get<CategoryService>(CategoryService);
     productRepository = module.get<Repository<ProductEntity>>(getRepositoryToken(ProductEntity),);
   });
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+    expect(categoryService).toBeDefined();
     expect(productRepository).toBeDefined();
   });
 
@@ -46,5 +60,15 @@ describe('ProductService', () => {
     jest.spyOn(productRepository, 'find').mockRejectedValue(new Error());
 
     expect(service.getAllProducts()).rejects.toThrowError();
+  });
+
+  it('should return product after save in DB', async () => {
+    const product = await service.createProduct(createProductMock);
+    expect(product).toEqual(productMock);
+  });
+
+  it('should return product after save in DB', async () => {
+    jest.spyOn(categoryService, 'getCategoryById').mockRejectedValue(new Error());
+   expect(service.createProduct(createProductMock)).rejects.toThrowError();
   });
 });
