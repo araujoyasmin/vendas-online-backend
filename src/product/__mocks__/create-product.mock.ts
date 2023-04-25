@@ -1,5 +1,5 @@
-import { CreateProduct } from "../../product/dtos/create-product.dto";
-import { categoryMock } from "./category.mock";
+import { CreateProduct } from "../dtos/create-product.dto";
+import { categoryMock } from "../../category/__mocks__/category.mock";
 
 export const createProductMock: CreateProduct = {
     categoryId: categoryMock.id,
