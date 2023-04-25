@@ -19,7 +19,7 @@ export class CategoryController {
             (category) => new ReturnCategory(category)
         );
     }
-    @Roles(UserType.User)
+    @Roles(UserType.Admin)
     @UsePipes(ValidationPipe)
     @Post()
     async createCategory(
