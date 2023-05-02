@@ -4,7 +4,7 @@ import { CreateUserDto } from './dtos/createUser.dto';
 import { UserEntity } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { UpdatePasswordDTO } from './dtos/update-password.dto';
-import { createPasswordHashed, validatePassword } from 'src/utils/password';
+import { createPasswordHashed, validatePassword } from '../utils/password';
 
 @Injectable()
 export class UserService {
@@ -22,8 +22,6 @@ export class UserService {
             throw new BadGatewayException('Email já existente!');
         }
 
-
-        const saltOrRounds = 10;
         const passwordHashed = await createPasswordHashed(createUserDto.password);
         
         return this.userRepository.save({
@@ -91,7 +89,7 @@ export class UserService {
         const isMatch = await validatePassword(updatePasswordDTO.lastPassword, user.password || '');
         
         if(!isMatch){
-            throw new BadRequestException('Last password invalid!');
+            throw new NotFoundException('Last password invalid!');
         }
         
         return this.userRepository.save({
