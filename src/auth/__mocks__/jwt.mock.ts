@@ -1,1 +1,1 @@
-export const jwtMock: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidHlwZVVzZXIiOjEsImlhdCI6MTY4MTk2ODc3MywiZXhwIjoxNjgyNTczNTczfQ.HWxQ_UvXeYGJuv5KnE1XjnyBrOorFR1oE6o2vnmpfW8';
+export const jwtMock: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidHlwZVVzZXIiOjIsImlhdCI6MTY4MzAwMTM1NSwiZXhwIjoxNjgzNjA2MTU1fQ.PjBw8bZs9gXnWWv41zu57dDREpthML7xDttu5fXeLnM';

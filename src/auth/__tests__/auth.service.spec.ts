@@ -26,7 +26,7 @@ describe('AuthService', () => {
         {
           provide: JwtService,
           useValue: {
-            sign: jest.fn().mockResolvedValue(jwtMock),
+            sign: jwtMock,
           }
         }
       ],
@@ -38,10 +38,11 @@ describe('AuthService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+    expect(userService).toBeDefined();
   });
 
   
-  it('should return user if password and email valid', async () => {
+  it('should return user if password and email valid 1', async () => {
     const user = await service.login(loginUserMock);
 
     expect(user).toEqual(
@@ -53,10 +54,10 @@ describe('AuthService', () => {
 
   });
 
-  it('should return user password invalid and email valid', async () => {
+  it('should return user password invalid and email valid 2', async () => {
     
     expect(
-      service.login({ ...loginUserMock, password: '123'}),
+      service.login({ ...loginUserMock, password: 'novasenha'}),
     
     ).rejects.toThrowError();
 

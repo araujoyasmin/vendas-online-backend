@@ -88,8 +88,8 @@ describe('UserService', () => {
   });
 
   it('should return user in update password', async () => {
-    console.log(userEntityMock.password);
-    console.log(updatePasswordMock.lastPassword);
+    // console.log(userEntityMock.password);
+    // console.log(updatePasswordMock.lastPassword);
     const user = await service.updatePasswordUser(updatePasswordMock, userEntityMock.id);
 
     expect(user).toEqual(userEntityMock);
