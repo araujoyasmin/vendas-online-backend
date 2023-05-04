@@ -26,9 +26,9 @@ describe('AuthService', () => {
         {
           provide: JwtService,
           useValue: {
-            sign: jwtMock,
-          }
-        }
+            sign: () => jwtMock,
+          },
+        },
       ],
     }).compile();
 
@@ -44,7 +44,7 @@ describe('AuthService', () => {
   
   it('should return user if password and email valid 1', async () => {
     const user = await service.login(loginUserMock);
-
+   
     expect(user).toEqual(
       {
         accessToken: jwtMock,

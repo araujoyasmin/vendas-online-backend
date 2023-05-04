@@ -25,6 +25,8 @@ export class AuthService {
             throw new NotFoundException(`Email or password invalid`);
         };
 
+        
+
         return {
             accessToken: this.jwtService.sign({...new LoginPayload(user) }),
             user: new ReturnUserDto(user),
