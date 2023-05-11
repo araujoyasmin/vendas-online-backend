@@ -1,6 +1,6 @@
 import { AddressEntity } from "../../address/entities/address.entity";
 import { StateEntity } from "../../state/entities/state.entity";
-import { Column, Entity, CreateDateColumn,PrimaryGeneratedColumn, OneToMany, ManyToOne, JoinColumn } from "typeorm";
+import { Column, Entity, CreateDateColumn,PrimaryGeneratedColumn, OneToMany, ManyToOne, JoinColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({ name: 'payment_status'})
 export class PaymentStatusEntity {
@@ -16,7 +16,7 @@ export class PaymentStatusEntity {
     @CreateDateColumn({ name: 'created_at'})
     createdAt: Date;
 
-    @CreateDateColumn({ name: 'updated_at'})
+    @UpdateDateColumn({ name: 'updated_at'})
     updatedAt: Date;
 
    
