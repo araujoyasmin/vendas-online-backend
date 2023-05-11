@@ -1,4 +1,6 @@
 
+import { OrderEntity } from "src/order/entities/order.entity";
+import { PaymentStatusEntity } from "src/payment-status/entities/payment-status.entity";
 import { Column, Entity, CreateDateColumn,PrimaryGeneratedColumn, OneToMany, ManyToOne, JoinColumn, TableInheritance } from "typeorm";
 
 @Entity({ name: 'payment'})
@@ -21,4 +23,11 @@ export abstract class PaymentEntity {
 
     @Column({ name:'type', nullable:false})
     type: string;
+
+    @OneToMany(() => OrderEntity, (order) => order.payment)
+    orders?: OrderEntity[];
+
+    @ManyToOne(() => PaymentStatusEntity, (payment) => payment.payments)
+    @JoinColumn({ name: 'status_id', referencedColumnName: 'id'})
+    status?: PaymentStatusEntity;
 }
